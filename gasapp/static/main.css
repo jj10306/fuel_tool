@@ -1,0 +1,31 @@
+/*.fieldSet{
+    border: solid black thin;
+    width: 500px;
+
+}*/
+/*fieldset {
+    border:solid black thin;
+    width: 1000px;
+    margin: auto;
+}*/
+input[type=text] {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: grey;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+p {
+    color: white;
+    font-family: verdana;
+    font-size: 10px;
+}
