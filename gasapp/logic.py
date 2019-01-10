@@ -2,8 +2,9 @@
 #logic for instantiating objects to query, web scrape, and hit API endpoints
 from gasapp.query import Query
 from gasapp.webscrape import WebScraper
-from gasapp.APIs import mapquestAPI
-from gasapp.APIs import gas_price
+
+
+
 
 class Driver:
     #id is the Vehicle object's id to get gas info
@@ -17,9 +18,7 @@ class Driver:
         query_obj = Query(self.id)
         gas_tup = query_obj.get_gas() #tuple of (fuel_type, mpg)
         webScrape_obj = WebScraper(self.start, self.end)
-        mileage = float(webScrape_obj.get_HTML().split()[0])
-        lat_lng = mapquestAPI(self.start)
-        price = gas_price()
+        mileage = float(webScrape_obj.get_HTML(True, "").split()[0])
         return {'fuel_type': gas_tup[0],
-        'mpg': float(gas_tup[1]), 'distance': mileage, 'lat-long': lat_lng,
-        'price': price}
+        'mpg': float(gas_tup[1]), 'distance': mileage,
+        'prices': {}}

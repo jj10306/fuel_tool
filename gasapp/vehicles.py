@@ -29,4 +29,3 @@ def find_mpg(row, make, model, year):
         return row['comb08']
     return False
 skinny_list = csv_reading('vehicles.csv')
-print(skinny_list)

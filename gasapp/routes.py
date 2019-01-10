@@ -1,18 +1,17 @@
-print('routes1')
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from gasapp import app, db
 from gasapp.forms import Form
 from gasapp.models import Vehicle
 import sqlite3
 from gasapp.logic import Driver
-print('routes2')
-
-# con = sqlite3.connect('vehicles.db')
-# cursor = con.cursor()
+from gasapp.webscrape import WebScraper
 
 
-# cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-nissan_list = db.session.query(Vehicle).distinct().filter_by(make = "Nissan").all() #how can I do all of the mess below with a query
+
+
+app.secret_key = "very secret"
+
+nissan_list = db.session.query(Vehicle).distinct().filter_by(make = "AM General").all() #how can I do all of the mess below with a query
 unique_list = [nissan_list[0]]
 
 @app.route('/', methods=['GET', 'POST'])
@@ -33,29 +32,35 @@ def dropdown():
 
     if request.method == 'POST':
         return submit()
-        # model = db.session.query(Vehicle).filter_by(id=form.model.data).first()
-        # return '<h1>Make: {}, Model: {}'.format(form.make.data, model.model)
 
     return render_template('test.html', form=form)
 
-# @app.route("/somewhere_else", methods=['GET', 'POST'] )
-# def submit():
-#     id = request.form['year'] ###look at HTML to see that year dropdown return vehicle's ID
-#     start = request.form['start_address']
-#     end = request.form['end_address']
-#     driver = Driver(id, start, end)
-#     print(driver.drive())
-#     return redirect('http://localhost:5000/')
 
 def submit():
     id = request.form['year'] ###look at HTML to see that year dropdown return vehicle's ID
     start = request.form['start_address']
+    start_state = get_state(start)
     end = request.form['end_address']
+    end_state = get_state(end)
     driver = Driver(id, start, end)
-
+    buffer_obj = WebScraper("","")
+    gas_dict = buffer_obj.get_HTML(False, start_state)
     data = driver.drive()
-    result = data['price']
-    return render_template('display.html', result=result)
+
+    data['prices'] = gas_dict
+    total = data['distance'] / data['mpg'] * data['prices'][data['fuel_type']]
+    total = round(total, 2)
+
+
+    return render_template('display.html', result = total)
+
+def get_state(address): #passed address as entered in form's text field
+    split_list = address.split(",")
+    state = split_list[2].strip()
+    url_state = state
+    return state
+
+
 
 @app.route('/model/<make>') #query to get unique and order
 def model(make):

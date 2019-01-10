@@ -1,13 +1,8 @@
-print('forms1')
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
-print('forms2')
 
-class Form(FlaskForm):
-    start_address = StringField("Start Address")
-    end_address = StringField("End Address")
-    make = SelectField('make', choices = [('AM General', 'AM General'), ('ASC Incorporated', 'ASC Incorporated'), ('Acura', 'Acura'), ('Alfa Romeo', 'Alfa Romeo'), ('American Motors Corporation', 'American Motors Corporation'), ('Aston Martin', 'Aston Martin'), ('Audi', 'Audi'), ('Aurora Cars Ltd', 'Aurora Cars Ltd')
+makes = [('AM General', 'AM General'), ('ASC Incorporated', 'ASC Incorporated'), ('Acura', 'Acura'), ('Alfa Romeo', 'Alfa Romeo'), ('American Motors Corporation', 'American Motors Corporation'), ('Aston Martin', 'Aston Martin'), ('Audi', 'Audi'), ('Aurora Cars Ltd', 'Aurora Cars Ltd')
                                         ,('Autokraft Limited', 'Autokraft Limited'), ('Avanti Motor Corporation', 'Avanti Motor Corporation'), ('Azure Dynamics', 'Azure Dynamics'), ('BMW', 'BMW'), ('BMW Alpina', 'BMW Alpina'), ('BYD', 'BYD'), ('Bentley', 'Bentley'), ('Bertone', 'Bertone'), ('Bill Dovell Motor Car Company', 'Bill Dovell Motor Car Company')
                                         ,('Bitter Gmbh and Co. Kg', 'Bitter Gmbh and Co. Kg'), ('Bugatti', 'Bugatti'), ('Buick', 'Buick'), ('CCC Engineering', 'CCC Engineering'), ('CODA Automotive', 'CODA Automotive'), ('CX Automotive', 'CX Automotive'), ('Cadillac', 'Cadillac'), ('Chevrolet', 'Chevrolet'), ('Chrysler', 'Chrysler')
                                         ,('Consulier Industries Inc', 'Consulier Industries Inc'), ('Dabryan Coach Builders Inc', 'Dabryan Coach Builders Inc'), ('Dacia', 'Dacia'), ('Daewoo', 'Daewoo'), ('Daihatsu', 'Daihatsu'), ('Dodge', 'Dodge'), ('E. P. Dutton, Inc.', 'E. P. Dutton, Inc.'), ('Eagle', 'Eagle'), ('Environmental Rsch and Devp Corp', 'Environmental Rsch and Devp Corp')
@@ -19,6 +14,11 @@ class Form(FlaskForm):
                                         ,('Panther Car Company Limited', 'Panther Car Company Limited'), ('Peugeot', 'Peugeot'), ('Pininfarina', 'Pininfarina'), ('Plymouth', 'Plymouth'), ('Pontiac', 'Pontiac'), ('Porsche', 'Porsche'), ('Quantum Technologies', 'Quantum Technologies'), ('Qvale', 'Qvale'), ('Ram', 'Ram'), ('Red Shift Ltd.', 'Red Shift Ltd.'), ('Renault', 'Renault'), ('Rolls-Royce', 'Rolls-Royce'), ('Roush Performance', 'Roush Performance')
                                         ,('Ruf Automobile Gmbh', 'Ruf Automobile Gmbh'), ('S and S Coach Company  E.p. Dutton', 'S and S Coach Company  E.p. Dutton'), ('SRT', 'SRT'), ('Saab', 'Saab'), ('Saleen', 'Saleen'), ('Saleen Performance', 'Saleen Performance'), ('Saturn', 'Saturn'), ('Scion', 'Scion'), ('Shelby', 'Shelby'), ('Spyker', 'Spyker'), ('Sterling', 'Sterling'), ('Subaru', 'Subaru'), ('Superior Coaches Div E.p. Dutton', 'Superior Coaches Div E.p. Dutton')
                                         ,('Suzuki', 'Suzuki'), ('TVR Engineering Ltd', 'TVR Engineering Ltd'), ('Tecstar, LP', 'Tecstar, LP'), ('Tesla', 'Tesla'), ('Texas Coach Company', 'Texas Coach Company')
-                                        ,('Toyota', 'Toyota'), ('VPG', 'VPG'), ('Vector', 'Vector'), ('Vixen Motor Company', 'Vixen Motor Company'), ('Volga Associated Automobile', 'Volga Associated Automobile'), ('Volkswagen', 'Volkswagen'), ('Volvo', 'Volvo'), ('Wallace Environmental', 'Wallace Environmental'), ('Yugo', 'Yugo'), ('smart', 'smart')])
-    model = SelectField('model', choices = [])
-    year = SelectField('year', choices = [('100','100')])
+                                        ,('Toyota', 'Toyota'), ('VPG', 'VPG'), ('Vector', 'Vector'), ('Vixen Motor Company', 'Vixen Motor Company'), ('Volga Associated Automobile', 'Volga Associated Automobile'), ('Volkswagen', 'Volkswagen'), ('Volvo', 'Volvo'), ('Wallace Environmental', 'Wallace Environmental'), ('Yugo', 'Yugo'), ('smart', 'smart')]
+
+class Form(FlaskForm):
+    start_address = StringField("Start Address (must be separated with commas!)")
+    end_address = StringField("End Address (must be separated with commas!)")
+    make = SelectField('Make', choices = makes)
+    model = SelectField('Model', choices = [])
+    year = SelectField('Year', choices = [('2000','2000')])

@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title> Amount Spent </title>
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='display.css')}}">
 </head>
 <body>
-    <p>{{result}}</p>
+    <div>
+        <h1> Amount Spent </h1>
+        <h2> ${{result}} </h2>
+        <p> <a href="{{url_for('dropdown')}}"> Click here </a> to go back to the Fuel Tool! </p>
+    </div>
 </body>
 </html>

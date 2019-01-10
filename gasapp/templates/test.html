@@ -1,72 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Gas Expense Calculator</title>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
-</head>
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-<body>
+
+{% block title %}
+Fuel Tool - Gas Expense Calculator
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='main.css')}}">
+{% endblock %}
+
+
+{% block content %}
 <div id="main_container">
     <p><a href = "https://www.linkedin.com/in/jakob-johnson-9a00a0159/" title="Go to my LinkedIn">Jakob Johnson</a></p>
     <p><a href = "http://www.gatech.edu/" title="Go to my awesome school's website">Georgia Tech</a></p>
-    <h1>Gas Expenses Calculator</h1>
+    <h1> Fuel Tool </h1>
 
     <form method="POST">
         <div class="fieldSet">
             <fieldset>
             <legend>Trip Information</legend>
-                <p>Make</p>
-                {{form.make}}
-                <p>Model</p>
-                {{form.model}}
-                <p>Year</p>
-                {{form.year}}<br>
-                <label for="start">Starting Address</label>
-                {{form.start_address(placeholder="Street, City, State, Zip")}}
-                <label for="end">Ending Address</label>
-                {{form.end_address(placeholder="Street, City, State, Zip")}}
-                <input type='submit'>
+                <d1>
+                    {{wtf.form_field(form.make)}}
+                    {{wtf.form_field(form.model)}}
+                    {{wtf.form_field(form.year)}}
+                    {{wtf.form_field(form.start_address, placeholder="801 Atlantic Dr NW, Atlanta, GA")}}
+                    {{wtf.form_field(form.end_address, placeholder="801 Atlantic Dr NW, Atlanta, GA")}}
+                </d1>
+                <input type="submit" class="btn btn-dark" value="Calculate!">
             </fieldset>
         </div>
     </form>
-    <script>
-        let make_select = document.getElementById('make');
-        let model_select = document.getElementById('model');
-        let year_select = document.getElementById('year');
+</div>
+{% endblock %}
 
-        make_select.onchange = function() {
-            make = make_select.value;
-            console.log(make);
 
-            fetch('/model/' + make).then(function(response) {
 
-                response.json().then(function(data) {
-                    let optionHTML = '';
+{% block scripts %}
+<script src="{{url_for('.static', filename='dynamic_dropdown.js')}}"></script>
+{{super()}}
+{% endblock %}
 
-                    for (let model of data.models) {
-                        optionHTML += '<option value="' + model.model + '">' + model.model + '</option>'; //consider making the value model.id and accounting for that in script
-                    }
-                    model_select.innerHTML = optionHTML;
-                });
-            });
-        }
-        model_select.onchange = function() {
-            model = model_select.value;
-            console.log(model);
-
-            fetch('/year/' + model).then(function(response) {
-
-                response.json().then(function(data) {
-                    let optionHTML = '';
-
-                    for (let year of data.years) {
-                        optionHTML += '<option value="' + year.id + '">' + year.year + '</option>';
-                    }
-                    year_select.innerHTML = optionHTML;
-                });
-            });
-        }
-    </script>
-</body>
-</html>
