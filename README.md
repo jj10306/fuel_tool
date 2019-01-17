@@ -11,7 +11,7 @@ Flask web application that calculates a user’s gas expense based on user-provi
 
 *Disclaimer*
 
-My intentions with this project were to get my feet (or fingers, rather) wet with web scraping and full stack dev. The frontend is minimal and far from jawdroppingly beautiful, but instead I wanted to take this project as time to learn the interactions between the database, the server-side, and the client-side
+My intentions with this project were to get my feet (or fingers, rather) wet with web scraping and full stack dev. The frontend is minimal and far from jawdroppingly beautiful, but instead I wanted to take this project as time to familiarize myself with the interactions between the database, the server-side, and the client-side
 
 *End Disclaimer*
 
@@ -29,5 +29,5 @@ Database: SQLite
 - Web Scraping: Utilizes Selenium WebDriver to get JavaScript manipulated DOM of Google Maps, Beautiful Soup package then used to parse source HTML and extract the user’s travel mileage
 - Refined 14 MB of CSV general vehicle data to 2 MB of fuel-related vehicle data and migrated the refined data into a SQLite database
 - Web scrapes https://gasprices.aaa.com/ to get current gas prices in the user’s state
-- Uses client-side JavaScript to make AJAX callbacks dynamically resizing/populate dropdowns without loading a new page
-- Uses Flask-Bootstrap integration to make a 
+- Uses client-side JavaScript to make AJAX callbacks dynamically populate dropdowns after querying the DB without loading a new page
+- Uses Flask-Bootstrap integration 
