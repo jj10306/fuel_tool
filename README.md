@@ -3,7 +3,7 @@
 # Fuel Tool: Gas Expense Calculator :fuelpump:
 Flask web application that calculates a user’s gas expense based on user-provided data regarding their trip and vehicle
 
-- Information is gathered about the user's vehicle through the dropdowns and then the database is queried to get the user's vehicle's mpg. (Please Note: The dropdowns are dynamically populated based on the previous dropdown's value. For example, if you chose Nissan as the Make, then only the Nissan 'makes' would appear in the Make dropdown. Same logic applies for the Year dropdown)
+- Information is gathered about the user's vehicle through the dropdowns and then the database is queried to get the user's vehicle's mpg. (Please Note: The dropdowns are dynamically populated based on the previous dropdown's value. For example, if you chose Nissan as the Make, then only the Nissan 'models' would appear in the Model dropdown. Same logic applies for the Year dropdown)
 - The start and end addresses of the user's trip is gathered from the text fields of the form and then the mileage is obtained via scraping https://www.google.com/maps/dir/ (driving directions between the two addresses)
 - The gas price is gathered based on the current average gas price in the state of their start address, via scraping of https://gasprices.aaa.com/ 
 - The following formula was applied to get the user's fuel expense for the trip:
